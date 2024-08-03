@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Quicksand", Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: #202124;   
+}
+
+.navbar{
+    
+    width: calc(100% - 3em);
+    height: 5em;
+    background-color: #6aaa64;
+
+    margin-bottom: 1em;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+
+    color: white;
+
+}
+
+.menu{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    gap: 1em;
+
+}
+
+.menu svg{
+    width: 3em;
+    height: 3em;
+
+    cursor: pointer;
+}
+
+.menu #mode-label{
+    font-size: 1.5em;
+    font-weight: bold;
+
+    width: 9em;
+    user-select: none;
+}
+
+.words{
+
+    display: grid;
+    grid-template-columns: repeat(5, 5em);
+
+    gap: 1em .5em;
+
+}
+
+.words > *{
+    border: .1em solid white;
+
+    height: 2em;
+    width: 2em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 2em;
+}
+
+.letter-right-spot{
+    background-color: #6aaa64;
+    border: .1em solid #6aaa64;
+}
+
+.letter-in-word{
+    background-color: #d1b036;
+    border: .1em solid #d1b036;
+}
+
+/* Classes da responsividade */
+.container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* border: 1px solid red; */
+}
+  
+/* 2xl */
+@media (max-width: 1536px) {
+    .container {
+      max-width: 1280px;
+    }
+}
+  
+/* xl */
+@media (max-width: 1280px) {
+    .container {
+      max-width: 1024px;
+    }
+
+}
+  
+/* lg */
+@media (max-width: 1024px) {
+    .container {
+      max-width: 768px;
+    }
+
+}
+  
+/* md */
+@media (max-width: 768px) {
+    .container {
+      max-width: 640px;
+    }
+}  
+
+/* sm */
+@media (max-width: 640px) {
+    .container {
+      max-width: 475px;
+    }
+}
+  
+/* xs */
+@media (max-width: 475px) {
+    .container {
+      width: 100%;
+    }
+}

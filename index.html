@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Wordle</title>
+</head>
+<body id="body">
+
+    <div class="navbar">
+        <h1>Word-le</h1>
+        <div class="menu">
+            <svg id="shuffle-off" onclick="changeMode()" style="display: block;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
+            <svg id="shuffle-on" onclick="changeMode()" style="display: none;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z"/></svg>
+            <p id="mode-label">Word of the day</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="words">
+            <div id="letter_1-1"></div>
+            <div id="letter_1-2"></div>
+            <div id="letter_1-3"></div>
+            <div id="letter_1-4"></div>
+            <div id="letter_1-5"></div>
+            <div id="letter_2-1"></div>
+            <div id="letter_2-2"></div>
+            <div id="letter_2-3"></div>
+            <div id="letter_2-4"></div>
+            <div id="letter_2-5"></div>
+            <div id="letter_3-1"></div>
+            <div id="letter_3-2"></div>
+            <div id="letter_3-3"></div>
+            <div id="letter_3-4"></div>
+            <div id="letter_3-5"></div>
+            <div id="letter_4-1"></div>
+            <div id="letter_4-2"></div>
+            <div id="letter_4-3"></div>
+            <div id="letter_4-4"></div>
+            <div id="letter_4-5"></div>
+            <div id="letter_5-1"></div>
+            <div id="letter_5-2"></div>
+            <div id="letter_5-3"></div>
+            <div id="letter_5-4"></div>
+            <div id="letter_5-5"></div>
+            <div id="letter_6-1"></div>
+            <div id="letter_6-2"></div>
+            <div id="letter_6-3"></div>
+            <div id="letter_6-4"></div>
+            <div id="letter_6-5"></div>
+        </div>
+    </div>
+</body>
+<script src="index.js"></script>
+</html>
