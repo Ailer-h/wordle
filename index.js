@@ -1,5 +1,5 @@
-var guesses = 1;
-var max_guesses = 5;
+var guesses = 0;
+var max_guesses = 6;
 
 var word_typed = [];
 
@@ -14,16 +14,22 @@ load_words("https://raw.githubusercontent.com/Ailer-h/wordle/main/valid-wordle-w
         if(!event.ctrlKey){
             if(event.key === "Enter"){
                 if(word_typed.length == 5){
-                    console.log(word_typed.join(""))
 
                     if(!words.includes(word_typed.join("").toLowerCase())){
-                        notInWordList();
+                        notInWordList(); //Drops an warning on screen
                     
                     }else{
-                        submit_guess(word_typed, word.toUpperCase());
+                        let won = submit_guess(word_typed, word.toUpperCase());
 
                         guesses++;
                         word_typed.length = 0;
+
+                        if(won){
+                            trigger_victory();
+                        
+                        }else if(guesses >= max_guesses){
+                            trigger_loss(word);
+                        }
                     }
                 }
             
@@ -49,7 +55,7 @@ function timeout(ms) {
 }
 
 async function notInWordList(){
-    document.getElementById("wrong").style.opacity = "1";
+    document.getElementById("wrong").style.opacity = 1;
     await timeout(500);
     document.getElementById("wrong").style.opacity = 0;
 }
@@ -93,11 +99,23 @@ async function load_words(words_list){
 
 }
 
+function trigger_victory(){
+    document.getElementById("go-warning").style.opacity = 1;
+    document.getElementById("msg").textContent = "You Won!";
+    document.getElementById("info").textContent = "Took you " + guesses + " guesses!"
+}
+
+function trigger_loss(word){
+    document.getElementById("go-warning").style.opacity = 1;
+    document.getElementById("msg").textContent = "You lost!";
+    document.getElementById("info").textContent = "The word was: " + word;
+}
+
 function pass_letters(word_array){
 
     for(let i = 0; i < 5; i++){
         let letter = word_array.length >= i ? word_array[i] : "";
-        let id = "letter_" + guesses + "-" + (i + 1);
+        let id = "letter_" + (guesses + 1) + "-" + (i + 1);
 
         document.getElementById(id).textContent = letter;
 
@@ -107,13 +125,17 @@ function pass_letters(word_array){
 
 function submit_guess(word_array, real_word){
 
+    let right_letters = 0;
+
     for(let i = 0; i < 5; i++){
         let letter = word_array[i];
-        let id = "letter_" + guesses + "-" + (i + 1);
+        let id = "letter_" + (guesses + 1) + "-" + (i + 1);
         
         if(letter == real_word.charAt(i)){
             document.getElementById(id).classList.add("letter-right-spot");
             document.getElementById(letter.toLowerCase()).classList.add("letter-right-spot");
+
+            right_letters++;
         
         }else if(letter != real_word.charAt(i) && real_word.includes(letter)){
             document.getElementById(id).classList.add("letter-in-word");
@@ -121,5 +143,7 @@ function submit_guess(word_array, real_word){
         }
         
     }
+
+    return right_letters == 5;
 
 }

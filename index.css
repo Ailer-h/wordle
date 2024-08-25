@@ -197,6 +197,8 @@ body{
 
     backdrop-filter: brightness(50%) blur(.3em);
 
+    opacity: 0;
+
 }
 
 /* Classes da responsividade */
