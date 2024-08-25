@@ -3,31 +3,36 @@ var max_guesses = 5;
 
 var word_typed = [];
 
-load_words("https://gist.githubusercontent.com/dracos/dd0668f281e685bad51479e5acaadb93/raw/6bfa15d263d6d5b63840a8e5b64e04b382fdb079/valid-wordle-words.txt").then(word => {
+var test = []
+
+load_words(test, "https://gist.githubusercontent.com/dracos/dd0668f281e685bad51479e5acaadb93/raw/6bfa15d263d6d5b63840a8e5b64e04b382fdb079/valid-wordle-words.txt").then(word => {
     console.log(word)
     
     document.getElementById("body").addEventListener("keydown", (event) =>{
 
-        if(event.key === "Enter"){
-            if(word_typed.length == 5){
-                submit_guess(word_typed, word.toUpperCase());
-
-                guesses++;
-                word_typed.length = 0;
+        if(!event.ctrlKey){
+            if(event.key === "Enter"){
+                if(word_typed.length == 5){
+                    if((word_typed.join("")))
+                    submit_guess(word_typed, word.toUpperCase());
+    
+                    guesses++;
+                    word_typed.length = 0;
+                }
+            
+            }else if(event.code.includes("Key") && word_typed.length < 5){
+                word_typed.push(event.key.toUpperCase());
+    
+                pass_letters(word_typed);
+            
+            }else if(event.key === "Backspace"){
+                word_typed.pop();
+    
+                pass_letters(word_typed);
+            
             }
-        
-        }else if(event.code.includes("Key") && word_typed.length < 5){
-            word_typed.push(event.key.toUpperCase());
-
-            pass_letters(word_typed);
-        
-        }else if(event.key === "Backspace"){
-            word_typed.pop();
-
-            pass_letters(word_typed);
-        
         }
-
+        
     });
 
 });
@@ -61,6 +66,7 @@ async function load_words(words_list){
         let data = await response.text();
         
         let words = data.split("\n").map(word => word.trim()).filter(word => word.length > 0);
+
         return words[Math.floor(Math.random() * words.length)];
 
     }catch(error){
