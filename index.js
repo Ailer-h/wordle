@@ -5,19 +5,26 @@ var word_typed = [];
 
 var test = []
 
-load_words(test, "https://gist.githubusercontent.com/dracos/dd0668f281e685bad51479e5acaadb93/raw/6bfa15d263d6d5b63840a8e5b64e04b382fdb079/valid-wordle-words.txt").then(word => {
+load_words("https://raw.githubusercontent.com/Ailer-h/wordle/main/valid-wordle-words.txt").then(words => {
+    let word = words[Math.floor(Math.random() * words.length)]
     console.log(word)
-    
+
     document.getElementById("body").addEventListener("keydown", (event) =>{
 
         if(!event.ctrlKey){
             if(event.key === "Enter"){
                 if(word_typed.length == 5){
-                    if((word_typed.join("")))
-                    submit_guess(word_typed, word.toUpperCase());
-    
-                    guesses++;
-                    word_typed.length = 0;
+                    console.log(word_typed.join(""))
+
+                    if(!words.includes(word_typed.join("").toLowerCase())){
+                        notInWordList();
+                    
+                    }else{
+                        submit_guess(word_typed, word.toUpperCase());
+
+                        guesses++;
+                        word_typed.length = 0;
+                    }
                 }
             
             }else if(event.code.includes("Key") && word_typed.length < 5){
@@ -36,6 +43,16 @@ load_words(test, "https://gist.githubusercontent.com/dracos/dd0668f281e685bad514
     });
 
 });
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function notInWordList(){
+    document.getElementById("wrong").style.opacity = "1";
+    await timeout(500);
+    document.getElementById("wrong").style.opacity = 0;
+}
 
 function changeMode(){
 
@@ -67,7 +84,7 @@ async function load_words(words_list){
         
         let words = data.split("\n").map(word => word.trim()).filter(word => word.length > 0);
 
-        return words[Math.floor(Math.random() * words.length)];
+        return words;
 
     }catch(error){
         console.error("Error fetching this file:", error);
@@ -96,11 +113,12 @@ function submit_guess(word_array, real_word){
         
         if(letter == real_word.charAt(i)){
             document.getElementById(id).classList.add("letter-right-spot");
+            document.getElementById(letter.toLowerCase()).classList.add("letter-right-spot");
         
         }else if(letter != real_word.charAt(i) && real_word.includes(letter)){
             document.getElementById(id).classList.add("letter-in-word");
+            document.getElementById(letter.toLowerCase()).classList.add("letter-in-word");
         }
-
         
     }
 
