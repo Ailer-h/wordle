@@ -9,7 +9,10 @@
 <body id="body">
 
     <div class="navbar">
-        <h1>Word-le</h1>
+        <div>
+            <h1>Word-le</h1>
+            <p id="score">Score: 00</p>
+        </div>
         <div class="menu">
             <svg id="shuffle-off" onclick="changeMode()" style="display: block;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
             <svg id="shuffle-on" onclick="changeMode()" style="display: none;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z"/></svg>
@@ -52,32 +55,32 @@
         </div>
 
         <div class="letters">
-            <div id="a">a</div>
-            <div id="b">b</div>
-            <div id="c">c</div>
-            <div id="d">d</div>
-            <div id="e">e</div>
-            <div id="f">f</div>
-            <div id="g">g</div>
-            <div id="h">h</div>
-            <div id="i">i</div>
-            <div id="j">j</div>
-            <div id="k">k</div>
-            <div id="l">l</div>
-            <div id="m">m</div>
-            <div id="n">n</div>
-            <div id="o">o</div>
-            <div id="p">p</div>
-            <div id="q">q</div>
-            <div id="r">r</div>
-            <div id="s">s</div>
-            <div id="t">t</div>
-            <div id="u">u</div>
-            <div id="v">v</div>
-            <div id="w">w</div>
-            <div id="x">x</div>
-            <div id="y">y</div>
-            <div id="z">z</div>
+            <div id="key_a">a</div>
+            <div id="key_b">b</div>
+            <div id="key_c">c</div>
+            <div id="key_d">d</div>
+            <div id="key_e">e</div>
+            <div id="key_f">f</div>
+            <div id="key_g">g</div>
+            <div id="key_h">h</div>
+            <div id="key_i">i</div>
+            <div id="key_j">j</div>
+            <div id="key_k">k</div>
+            <div id="key_l">l</div>
+            <div id="key_m">m</div>
+            <div id="key_n">n</div>
+            <div id="key_o">o</div>
+            <div id="key_p">p</div>
+            <div id="key_q">q</div>
+            <div id="key_r">r</div>
+            <div id="key_s">s</div>
+            <div id="key_t">t</div>
+            <div id="key_u">u</div>
+            <div id="key_v">v</div>
+            <div id="key_w">w</div>
+            <div id="key_x">x</div>
+            <div id="key_y">y</div>
+            <div id="key_z">z</div>
         </div>
 
         <h1 id="wrong">Not in the word list!</h1>
@@ -88,7 +91,7 @@
             <h1 id="msg"></h1>
             <h3 id="info"></h3>
 
-            <button id="play-again" onclick="location.href = location.href">Play Again</button>
+            <button id="play-again">Play Again</button>
         </div>
     </div>
 </body>

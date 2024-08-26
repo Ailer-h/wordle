@@ -2,11 +2,11 @@ var guesses = 0;
 var max_guesses = 6;
 
 var word_typed = [];
-
-var test = []
+var score = 0;
 
 load_words("https://raw.githubusercontent.com/Ailer-h/wordle/main/valid-wordle-words.txt").then(words => {
     let word = words[Math.floor(Math.random() * words.length)]
+
     console.log(word)
 
     document.getElementById("body").addEventListener("keydown", (event) =>{
@@ -48,6 +48,19 @@ load_words("https://raw.githubusercontent.com/Ailer-h/wordle/main/valid-wordle-w
         
     });
 
+    document.getElementById("play-again").addEventListener("click", function(){
+        word = words[Math.floor(Math.random() * words.length)]
+        console.log(word)
+
+        guesses = 0;
+        word_typed.length = 0;
+
+        document.getElementById("go-warning").style.opacity = 0;
+
+        clear_board();
+        clear_keys();
+    });
+
 });
 
 function timeout(ms) {
@@ -58,6 +71,23 @@ async function notInWordList(){
     document.getElementById("wrong").style.opacity = 1;
     await timeout(500);
     document.getElementById("wrong").style.opacity = 0;
+}
+
+function clear_board(){
+    Array.from(document.getElementsByTagName("div")).forEach(div =>{
+        if(div.id.toLocaleLowerCase().includes("letter")){
+            div.classList = "";
+            div.textContent = "";
+        }
+    });
+}
+
+function clear_keys(){
+    Array.from(document.getElementsByTagName("div")).forEach(div =>{
+        if(div.id.toLocaleLowerCase().includes("key")){
+            div.classList = "";
+        }
+    });
 }
 
 function changeMode(){
@@ -103,6 +133,9 @@ function trigger_victory(){
     document.getElementById("go-warning").style.opacity = 1;
     document.getElementById("msg").textContent = "You Won!";
     document.getElementById("info").textContent = "Took you " + guesses + " guesses!"
+
+    score += 10 - (guesses-1);
+    document.getElementById("score").textContent = "Score: " + score;
 }
 
 function trigger_loss(word){
@@ -130,18 +163,22 @@ function submit_guess(word_array, real_word){
     for(let i = 0; i < 5; i++){
         let letter = word_array[i];
         let id = "letter_" + (guesses + 1) + "-" + (i + 1);
+
+        document.getElementById(id).style.animationDelay = 100*i + "ms"
+        document.getElementById(id).style.animation = "jump 300ms linear"
         
         if(letter == real_word.charAt(i)){
             document.getElementById(id).classList.add("letter-right-spot");
-            document.getElementById(letter.toLowerCase()).classList.add("letter-right-spot");
+            document.getElementById("key_" + letter.toLowerCase()).classList.add("letter-right-spot");
 
             right_letters++;
         
         }else if(letter != real_word.charAt(i) && real_word.includes(letter)){
             document.getElementById(id).classList.add("letter-in-word");
-            document.getElementById(letter.toLowerCase()).classList.add("letter-in-word");
-        }
+            document.getElementById("key_" + letter.toLowerCase()).classList.add("letter-in-word");
         
+        }
+
     }
 
     return right_letters == 5;
